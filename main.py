@@ -3,6 +3,7 @@
 # Imports
 from tkinter import *
 from tkinter import ttk, messagebox
+from tkinter import font as tk_font
 import requests
 import bs4
 
@@ -10,6 +11,8 @@ HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
 
 # Set Up Window
 root = Tk()
+root.tk.call('source', 'forest-dark.tcl') # Source - https://github.com/rdbende/Forest-ttk-theme
+ttk.Style().theme_use('forest-dark') ###########################################################
 root.title("Simple Stock Scraper")
 root.geometry("400x200")
 
@@ -38,14 +41,15 @@ def __fetch():
 	ebox.delete(0, END)
 
 # Widgets
-check_button = Button(root, text="Calculate Price", command=__fetch)
+Font_tuple = ("Segoe UI", 12, "bold") 
+s = ttk.Style()
+s.configure('my.TButton', font=Font_tuple)
+check_button = ttk.Button(root, text="Calculate Price", command=__fetch, style='my.TButton')
 check_button.pack()
-check_label = Label(root, text = "Enter Stock Symbol:")
+check_label = ttk.Label(root, text = "Enter Stock Symbol:", font=Font_tuple)
 check_label.pack()
-ebox = Entry(root)
+ebox = ttk.Entry(root)
 ebox.pack()
 
 # Run The GUI
-root.tk.call('source', 'forest-dark.tcl') # Source - https://github.com/rdbende/Forest-ttk-theme
-ttk.Style().theme_use('forest-dark') ###########################################################
 root.mainloop()
